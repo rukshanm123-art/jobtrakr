@@ -46,13 +46,13 @@ export async function GET() {
   const interviewRate = total > 0 ? Math.round((interviewed / total) * 100) : 0
   const offerRate = total > 0 ? Math.round((offered / total) * 100) : 0
 
-  // Average days to first response
+  // Average days to first response (rename inner var to avoid shadowing outer `responded`)
   const responseTimes = apps
     .filter((a) => a.events.length > 1)
     .map((a) => {
       const created = new Date(a.events[0].createdAt)
-      const responded = new Date(a.events[1].createdAt)
-      return (responded.getTime() - created.getTime()) / (1000 * 60 * 60 * 24)
+      const firstResponse = new Date(a.events[1].createdAt)
+      return (firstResponse.getTime() - created.getTime()) / (1000 * 60 * 60 * 24)
     })
   const avgDaysToResponse =
     responseTimes.length > 0

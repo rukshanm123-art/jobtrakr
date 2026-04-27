@@ -8,7 +8,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (!session) redirect('/login')
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-[#FAFAF8] dark:bg-[#0c0c0b]">
       <Sidebar />
       <main className="ml-56 flex-1 overflow-y-auto">
         {children}

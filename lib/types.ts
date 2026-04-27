@@ -40,12 +40,17 @@ export interface Stats {
   avgDaysToResponse: number
 }
 
-export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string; border: string; step: number }> = {
+export const STATUS_CONFIG: Record<
+  Status,
+  { label: string; color: string; bg: string; border: string; darkBg: string; darkBorder: string; step: number }
+> = {
   APPLIED: {
     label: 'Applied',
     color: '#6B7280',
     bg: '#F3F4F6',
     border: '#D1D5DB',
+    darkBg: '#27272a',
+    darkBorder: '#3f3f46',
     step: 1,
   },
   PHONE_SCREEN: {
@@ -53,6 +58,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#3B82F6',
     bg: '#EFF6FF',
     border: '#BFDBFE',
+    darkBg: '#172554',
+    darkBorder: '#1e40af',
     step: 2,
   },
   INTERVIEW: {
@@ -60,6 +67,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#8B5CF6',
     bg: '#F5F3FF',
     border: '#DDD6FE',
+    darkBg: '#2e1065',
+    darkBorder: '#5b21b6',
     step: 3,
   },
   TECHNICAL: {
@@ -67,6 +76,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#F59E0B',
     bg: '#FFFBEB',
     border: '#FDE68A',
+    darkBg: '#422006',
+    darkBorder: '#92400e',
     step: 4,
   },
   FINAL_INTERVIEW: {
@@ -74,6 +85,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#EC4899',
     bg: '#FDF2F8',
     border: '#FBCFE8',
+    darkBg: '#500724',
+    darkBorder: '#9d174d',
     step: 5,
   },
   OFFER: {
@@ -81,6 +94,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#10B981',
     bg: '#ECFDF5',
     border: '#A7F3D0',
+    darkBg: '#022c22',
+    darkBorder: '#065f46',
     step: 6,
   },
   REJECTED: {
@@ -88,6 +103,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#EF4444',
     bg: '#FEF2F2',
     border: '#FECACA',
+    darkBg: '#450a0a',
+    darkBorder: '#991b1b',
     step: 0,
   },
   WITHDRAWN: {
@@ -95,6 +112,8 @@ export const STATUS_CONFIG: Record<Status, { label: string; color: string; bg: s
     color: '#9CA3AF',
     bg: '#F9FAFB',
     border: '#E5E7EB',
+    darkBg: '#1c1917',
+    darkBorder: '#44403c',
     step: 0,
   },
 }

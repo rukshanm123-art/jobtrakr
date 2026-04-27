@@ -8,10 +8,11 @@ import type { Application } from '@/lib/types'
 
 interface Props {
   application?: Application
-  onSuccess?: () => void
+  onSuccess?: (updated: Application) => void
+  onCancel?: () => void
 }
 
-export function ApplicationForm({ application, onSuccess }: Props) {
+export function ApplicationForm({ application, onSuccess, onCancel }: Props) {
   const router = useRouter()
   const isEdit = !!application
   const [loading, setLoading] = useState(false)
@@ -53,7 +54,7 @@ export function ApplicationForm({ application, onSuccess }: Props) {
       }
       const saved = await res.json()
       if (onSuccess) {
-        onSuccess()
+        onSuccess(saved)
       } else {
         router.push(`/applications/${saved.id}`)
         router.refresh()
@@ -69,7 +70,7 @@ export function ApplicationForm({ application, onSuccess }: Props) {
     label, icon: Icon, children,
   }: { label: string; icon: React.ElementType; children: React.ReactNode }) => (
     <div>
-      <label className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-stone-700">
+      <label className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-stone-700 dark:text-stone-300">
         <Icon className="h-3 w-3" />
         {label}
       </label>
@@ -77,7 +78,7 @@ export function ApplicationForm({ application, onSuccess }: Props) {
     </div>
   )
 
-  const inputCls = 'w-full rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-sm text-stone-900 placeholder-stone-400 outline-none transition focus:border-stone-400 focus:bg-white'
+  const inputCls = 'w-full rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 px-3 py-2 text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 outline-none transition focus:border-stone-400 dark:focus:border-stone-500 focus:bg-white dark:focus:bg-stone-700'
 
   return (
     <motion.form
@@ -136,21 +137,21 @@ export function ApplicationForm({ application, onSuccess }: Props) {
       )}
 
       {error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-xs text-red-600 border border-red-200">{error}</p>
+        <p className="rounded-lg bg-red-50 dark:bg-red-950 px-3 py-2 text-xs text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900">{error}</p>
       )}
 
       <div className="flex gap-3">
         <button
           type="button"
-          onClick={() => router.back()}
-          className="rounded-lg border border-stone-200 px-4 py-2 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-50"
+          onClick={() => onCancel ? onCancel() : router.back()}
+          className="rounded-lg border border-stone-200 dark:border-stone-700 px-4 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 transition-colors hover:bg-stone-50 dark:hover:bg-stone-800"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 rounded-lg bg-stone-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-stone-700 disabled:opacity-50"
+          className="flex-1 rounded-lg bg-stone-900 dark:bg-stone-100 px-4 py-2 text-sm font-medium text-white dark:text-stone-900 transition-colors hover:bg-stone-700 dark:hover:bg-stone-300 disabled:opacity-50"
         >
           {loading ? 'Saving...' : isEdit ? 'Save Changes' : 'Add Application'}
         </button>

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: string }) {
   const [display, setDisplay] = useState(0)
-  const rafRef = useRef<number>(0)
+  const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
     const start = display
@@ -21,7 +21,9 @@ export function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?
     }
 
     rafRef.current = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(rafRef.current)
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 

@@ -5,6 +5,13 @@ import { DashboardClient } from './DashboardClient'
 
 export const dynamic = 'force-dynamic'
 
+function getGreeting() {
+  const hour = new Date().getHours()
+  if (hour < 12) return 'Morning'
+  if (hour < 17) return 'Afternoon'
+  return 'Evening'
+}
+
 export default async function Dashboard() {
   const session = await getServerSession(authOptions)
   if (!session?.user?.id) return null
@@ -42,6 +49,7 @@ export default async function Dashboard() {
       responseRate={total > 0 ? Math.round((responded / total) * 100) : 0}
       interviewRate={total > 0 ? Math.round((interviewed / total) * 100) : 0}
       userName={session.user.name ?? ''}
+      greeting={getGreeting()}
     />
   )
 }
